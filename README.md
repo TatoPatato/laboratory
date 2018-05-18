@@ -1,1 +1,1 @@
-Laboratorio.
+研究室
