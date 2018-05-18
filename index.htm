@@ -1,1 +1,58 @@
-Hello world!
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.1.0/socket.io.dev.js"></script>
+<script>
+setTimeout(()=>{
+  k=[]
+  obj={}
+  socket=io()
+  socket.on("msg",(event)=>{obj=event.data;x=event.x;y=event.y})
+  onkeydown=onkeyup=(e)=>{
+    k[e.keyCode]=e.type=="keydown"
+  }
+  setInterval(()=>{
+    for(i=0;i<500;i++){
+      if(k[i]){
+        socket.emit(i)
+      }
+    }
+  },1)
+  socket.emit("name",{data:prompt("Enter your name.","Name here.")})
+  document.body.style.margin=0
+  c=document.createElement("canvas")
+  document.body.appendChild(c)
+  ctx=c.getContext("2d")
+  setInterval(()=>{
+    c.width=innerWidth
+    c.height=innerHeight
+    for(i1 in obj){
+      ctx.lineWidth=4
+      ctx.fillStyle="rgba(0,255,0,1)"
+      ctx.strokeStyle="rgba(0,127,0,1)"
+      ctx.fillRect(
+        obj[i1].x-obj[i1].s-x+innerWidth/2,
+        obj[i1].y-obj[i1].s-y+innerHeight/2,
+        obj[i1].s*2,
+        obj[i1].s*2
+      )
+      ctx.strokeRect(
+        obj[i1].x-obj[i1].s-x+innerWidth/2,
+        obj[i1].y-obj[i1].s-y+innerHeight/2,
+        obj[i1].s*2,
+        obj[i1].s*2
+      )
+      ctx.font="32px Impact"
+      ctx.fillStyle="rgba(255,255,0,1)"
+      ctx.strokeStyle="rgba(127,127,0,1)"
+      ctx.fillText(
+        obj[i1].name,
+        obj[i1].x-obj[i1].s-x+innerWidth/2,
+        obj[i1].y-obj[i1].s-y+innerHeight/2
+      )
+      ctx.strokeText(
+        obj[i1].name,
+        obj[i1].x-obj[i1].s-x+innerWidth/2,
+        obj[i1].y-obj[i1].s-y+innerHeight/2
+      )
+    }
+  },1)
+},1)
+</script>
