@@ -1,3 +1,4 @@
+obj={}
 app=require("express")()
 net=require("http").createServer(app)
 app.get("/",(req,res)=>{
@@ -5,5 +6,38 @@ res.sendFile(__dirname+"/index.htm")
 })
 net.listen(process.env.PORT||3000,()=>{console.log("Ready!")})
 require("socket.io")(net,{}).sockets.on("connection",(socket)=>{
-console.log("socket connection")
+  socket.i=Math.random()
+  obj[socket.i]={x:Math.random()*1024,y:Math.random()*1024,xs:0,ys:0,s:8+Math.random()*8,name:"Unnamed."}
+  socket.on("37",()=>{obj[socket.i].xs--})
+  socket.on("38",()=>{obj[socket.i].ys--})
+  socket.on("39",()=>{obj[socket.i].xs++})
+  socket.on("40",()=>{obj[socket.i].ys++})
+  socket.on("name",(event)=>{obj[socket.i].name=event.data})
+  setInterval(()=>{
+    socket.emit("msg",{data:obj,x:obj[socket.i].x,y:obj[socket.i].y})
+  },1)
 })
+setInterval(()=>{
+  for(i1 in obj){
+    obj[i1].x+=0.001*obj[i1].xs
+    obj[i1].y+=0.001*obj[i1].ys
+    obj[i1].xs*=0.999
+    obj[i1].ys*=0.999
+    for(i2 in obj){
+      if(obj[i1].x-obj[i2].s<obj[i2].x+obj[i2].s){
+        if(obj[i1].x+obj[i2].s>obj[i2].x-obj[i2].s){
+          if(obj[i1].y-obj[i2].s<obj[i2].y+obj[i2].s){
+            if(obj[i1].y+obj[i2].s>obj[i2].y-obj[i2].s){
+              if(obj[i1].s<obj[i2].s){
+                if(0<obj[i1].s){
+                  obj[i1].s-=0.01
+                  obj[i2].s+=0.01
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+},1)
