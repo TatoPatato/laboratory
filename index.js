@@ -41,3 +41,6 @@ setInterval(()=>{
     }
   }
 },1)
+setInterval(()=>{
+  obj[Math.random()]={x:Math.random()*1024,y:Math.random()*1024,xs:0,ys:0,s:8+Math.random()*8,name:""}
+},1000)
