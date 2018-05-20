@@ -24,10 +24,10 @@ setInterval(()=>{
     obj[i1].xs*=0.999
     obj[i1].ys*=0.999
     for(i2 in obj){
-      if(obj[i1].x-obj[i2].s<obj[i2].x+obj[i2].s){
-        if(obj[i1].x+obj[i2].s>obj[i2].x-obj[i2].s){
-          if(obj[i1].y-obj[i2].s<obj[i2].y+obj[i2].s){
-            if(obj[i1].y+obj[i2].s>obj[i2].y-obj[i2].s){
+      if(obj[i1].x-16<obj[i2].x+16){
+        if(obj[i1].x+16>obj[i2].x-16){
+          if(obj[i1].y-16<obj[i2].y+16){
+            if(obj[i1].y+16>obj[i2].y-16){
               if(obj[i1].s<obj[i2].s){
                 if(0<obj[i1].s){
                   obj[i1].s-=0.01
