@@ -41,6 +41,10 @@ setInterval(()=>{
     }
   }
 },1)
+count=0
 setInterval(()=>{
-  obj[Math.random()]={x:Math.random()*1024,y:Math.random()*1024,xs:0,ys:0,s:8+Math.random()*8,name:""}
+  if(count<100){
+    obj[Math.random()]={x:Math.random()*1024,y:Math.random()*1024,xs:0,ys:0,s:8+Math.random()*8,name:""}
+    count++
+  }
 },1000)
