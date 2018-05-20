@@ -30,8 +30,8 @@ setTimeout(()=>{
       ctx.fillRect(
         obj[i1].x-16-x+innerWidth/2,
         obj[i1].y-16-y+innerHeight/2,
-        obj[i1].s*2,
-        obj[i1].s*2
+        32,
+        32
       )
       ctx.strokeRect(
         obj[i1].x-16-x+innerWidth/2,
@@ -55,12 +55,12 @@ setTimeout(()=>{
       ctx.fillStyle="rgba(255,100,0,0.5)"
       ctx.strokeStyle="rgba(127,50,0,0.5)"
       ctx.fillText(
-        obj[i1].s,
+        Math.floor(obj[i1].s),
         obj[i1].x-x+innerWidth/2,
         obj[i1].y-y+innerHeight/2
       )
       ctx.strokeText(
-        obj[i1].s,
+        Math.floor(obj[i1].s),
         obj[i1].x-x+innerWidth/2,
         obj[i1].y-y+innerHeight/2
       )
