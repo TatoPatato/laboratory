@@ -7,7 +7,7 @@ res.sendFile(__dirname+"/index.htm")
 net.listen(process.env.PORT||3000,()=>{console.log("Ready!")})
 require("socket.io")(net,{}).sockets.on("connection",(socket)=>{
   socket.i=Math.random()
-  obj[socket.i]={x:Math.random()*1024,y:Math.random()*1024,xs:0,ys:0,s:8+Math.random()*8,name:"Unnamed."}
+  obj[socket.i]={x:Math.random()*1024,y:Math.random()*1024,xs:0,ys:0,s:16+Math.random()*16,name:"Unnamed."}
   socket.on("37",()=>{obj[socket.i].xs--})
   socket.on("38",()=>{obj[socket.i].ys--})
   socket.on("39",()=>{obj[socket.i].xs++})
